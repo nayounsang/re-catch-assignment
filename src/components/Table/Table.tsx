@@ -10,37 +10,10 @@ import { getOptionWithKey } from "../../utils/Array";
 import styles from "./Table.module.css";
 import { FilterContent } from "../Filter/FilterContent";
 import { MenuButton } from "../Button/MenuButton";
-import { v4 as uuidv4 } from 'uuid';
-
-const tableData: Record[] = [
-  {
-    key: uuidv4(),
-    name: "홍길동",
-    address: "서울시 강남구",
-    memo: "메모",
-    joinDate: new Date().toISOString(),
-    job: "개발자",
-    emailConsent: true,
-  },
-  {
-    key: uuidv4(),
-    name: "이순신",
-    address: "서울시 서초구",
-    memo: "메모",
-    joinDate: new Date().toISOString(),
-    job: "개발자",
-  },
-  {
-    key: uuidv4(),
-    name: "김철수",
-    address: "서울시 강남구",
-    memo: "메모",
-    joinDate: new Date().toISOString(),
-    job: "개발자",
-  },
-];
+import { useRecordStore } from "../../store/tableStore";
 
 export const Table = () => {
+  const { records: tableData } = useRecordStore();
   const columns: TableColumnsType<Record> = useMemo(
     () => [
       {
@@ -100,19 +73,20 @@ export const Table = () => {
         dataIndex: "job",
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
           <FilterContent
-            options={[{
+            options={[
+              {
                 value: "개발자",
-                text:"개발자",
-            },
-        {
-            value: "PO",
-            text: "PO",
-        },
-        {
-            value: "디자이너",
-            text: "디자이너",
-        },
-        ]}
+                text: "개발자",
+              },
+              {
+                value: "PO",
+                text: "PO",
+              },
+              {
+                value: "디자이너",
+                text: "디자이너",
+              },
+            ]}
             selectedKeys={selectedKeys}
             setSelectedKeys={setSelectedKeys}
             confirm={confirm}
@@ -149,12 +123,11 @@ export const Table = () => {
         ),
       },
       {
-        title: "",
         dataIndex: "update",
         render: () => <MenuButton />,
       },
     ],
-    []
+    [tableData]
   );
 
   const rowSelection: TableProps<Record>["rowSelection"] = {
