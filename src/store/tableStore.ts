@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { Record } from "../schema/record";
+import { defaultRecords } from "../const/defaultRecord";
 
 interface TableStore {
   records: Record[];
@@ -10,7 +11,7 @@ interface TableStore {
 }
 
 export const useRecordStore = create<TableStore>((set, get) => ({
-  records: [],
+  records: defaultRecords,
   getRecordFromKey: (key: string) => {
     return get().records.find((record) => record.key === key);
   },
