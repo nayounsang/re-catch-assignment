@@ -21,12 +21,16 @@ export const Select = ({ defaultValue, onChange, options }: SelectProps) => {
     <AntSelect
       defaultValue={defaultValue}
       onChange={onChange}
-      className={styles.dropdown}
+      className={styles.select}
+      popupClassName={styles["select-item"]}
     >
       {options.map((option) => {
         const { value, label } = option;
         return (
-          <AntSelect.Option key={value} value={value}>
+          <AntSelect.Option
+            key={value}
+            value={value}
+          >
             {label}
           </AntSelect.Option>
         );
