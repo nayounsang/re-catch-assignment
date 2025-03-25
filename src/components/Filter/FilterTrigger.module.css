@@ -1,0 +1,36 @@
+.filterTrigger {
+  width: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background-color: var(--color-table-fill-after);
+  border-bottom: 1px solid var(--color-table-split);
+  cursor: pointer;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.filterTrigger:hover {
+  background-color: var(--color-bg-hover);
+}
+
+.label {
+  color: var(--color-text);
+  font-size: 14px;
+}
+
+.icon {
+  color: var(--color-text-disabled);
+  font-size: 12px;
+}
+
+.popoverContent {
+  width: 150px;
+}
+
+.filterPopover :global(.ant-popover-inner) {
+  border-radius: 2px;
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12),
+    0 6px 16px 0 rgba(0, 0, 0, 0.08);
+}
