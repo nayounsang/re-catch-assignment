@@ -1,3 +1,16 @@
-.dropdown :hover {
+.select :global(.ant-select-selection-item) {
+  color: #000 !important;
+}
+
+.select :global(.ant-select-selection-item:hover) {
   color: var(--color-primary-hover) !important;
-} 
+}
+
+.select-item :global(.ant-select-item-option-selected) {
+  color: var(--color-primary) !important;
+  font-weight: 400 !important;
+}
+
+.select-item {
+  width: 190px !important;
+}
