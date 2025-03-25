@@ -1,13 +1,16 @@
 :root {
-  --color-primary-hover: #739FFF;
-  --color-control-item-bg-active: #F0F7FF;
+  --color-primary-hover: #739fff;
+  --color-control-item-bg-active: #f0f7ff;
   --color-control-item-bg-hover: rgba(0, 0, 0, 0.04);
-  --color-primary: #4A7CFE;
+  --color-primary: #4a7cfe;
   --color-text-disabled: rgba(0, 0, 0, 0.25);
   --color-table-fill-after: rgba(0, 0, 0, 0.02);
   --color-table-split: rgba(0, 0, 0, 0.06);
   --color-text: rgba(0, 0, 0, 0.88);
   --color-text-secondary: rgba(0, 0, 0, 0.65);
+  --color-text-tertiary: rgba(0, 0, 0, 0.45);
   --color-border: rgba(0, 0, 0, 0.15);
   --color-bg-hover: rgba(0, 0, 0, 0.04);
+  --color-error: #ff4d4f;
+  --color-fill-after: rgba(0, 0, 0, 0.02);
 }

@@ -8,7 +8,6 @@ export interface SelectProps {
 }
 
 export const Select = ({ defaultValue, onChange, options }: SelectProps) => {
-  console.log(styles);
   return (
     <AntSelect
       defaultValue={defaultValue}

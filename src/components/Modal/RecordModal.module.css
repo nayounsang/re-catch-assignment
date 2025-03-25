@@ -1,0 +1,32 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px !important;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  background-color: var(--color-fill-after);
+  padding: 12px 16px !important;
+}
+
+.content {
+  padding: 0 !important;
+}
+
+.header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-border) !important;
+  margin-bottom: 0 !important;
+  padding: 0 12px !important;
+}
+
+.body {
+  padding: 10px 24px !important;
+  max-height: 60vh;
+  overflow-y: auto;
+}
