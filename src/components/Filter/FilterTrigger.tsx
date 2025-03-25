@@ -6,23 +6,19 @@ import styles from "./FilterTrigger.module.css";
 interface FilterTriggerProps {
   label: string;
   onClick?: () => void;
+  content?: React.ReactNode;
 }
 
-export const FilterTrigger: React.FC<FilterTriggerProps> = ({
+export const FilterTrigger = ({
   label,
   onClick,
-}) => {
+  content,
+}: FilterTriggerProps) => {
   const [open, setOpen] = useState(false);
 
   const handleOpenChange = (newOpen: boolean) => {
     setOpen(newOpen);
   };
-
-  const content = (
-    <div className={styles.popoverContent}>
-      <p>체크박스 리스트가 들어갈 영역</p>
-    </div>
-  );
 
   return (
     <Popover
@@ -31,7 +27,11 @@ export const FilterTrigger: React.FC<FilterTriggerProps> = ({
       open={open}
       onOpenChange={handleOpenChange}
       placement="bottom"
-      classNames={{ root: styles.filterPopover }}
+      classNames={{
+        root: styles.filterPopover,
+        body: styles.popoverContent,
+      }}
+      arrow={false}
     >
       <div className={styles.filterTrigger} onClick={onClick}>
         <span className={styles.label}>{label}</span>
