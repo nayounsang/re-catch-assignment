@@ -1,0 +1,25 @@
+.element {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.element:hover {
+  background-color: var(--color-control-item-bg-hover);
+}
+
+.disabled {
+  color: var(--color-text-disabled);
+}
+
+.selected {
+  background-color: var(--color-control-item-bg-active);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
