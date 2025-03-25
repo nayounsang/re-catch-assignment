@@ -1,6 +1,6 @@
 import { Button as AntButton } from "antd";
 
-interface ButtonProps {
+export interface ButtonProps {
   icon: React.ReactNode;
   text: string;
   onClick?: React.MouseEventHandler<HTMLElement>;

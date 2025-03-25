@@ -1,7 +1,7 @@
 import { MoreOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 
-interface MenuButtonProps {
+export interface MenuButtonProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
   disabled?: boolean;
 }
