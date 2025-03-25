@@ -10,8 +10,11 @@ import { getOptionWithKey } from "../../utils/Array";
 import styles from "./Table.module.css";
 import { FilterContent } from "../Filter/FilterContent";
 import { MenuButton } from "../Button/MenuButton";
+import { v4 as uuidv4 } from 'uuid';
+
 const tableData: Record[] = [
   {
+    key: uuidv4(),
     name: "홍길동",
     address: "서울시 강남구",
     memo: "메모",
@@ -20,6 +23,7 @@ const tableData: Record[] = [
     emailConsent: true,
   },
   {
+    key: uuidv4(),
     name: "이순신",
     address: "서울시 서초구",
     memo: "메모",
@@ -27,6 +31,7 @@ const tableData: Record[] = [
     job: "개발자",
   },
   {
+    key: uuidv4(),
     name: "김철수",
     address: "서울시 강남구",
     memo: "메모",

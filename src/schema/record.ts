@@ -8,6 +8,7 @@ export const JobType = {
 export type JobType = (typeof JobType)[keyof typeof JobType];
 
 export const recordSchema = z.object({
+  key: z.string(),
   name: z.string().min(1, { message: "이름은 필수 입력 항목입니다." }),
   address: z.string().optional(),
   memo: z.string().optional(),
