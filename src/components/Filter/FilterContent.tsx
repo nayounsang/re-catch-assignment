@@ -1,25 +1,46 @@
 import { Checkbox } from "antd";
 import { useId } from "react";
 import styles from "./FilterContent.module.css";
-import { Option } from "../../types";
+import { FilterOption } from "../../types";
 
-export const FilterContent = ({ options }: { options: Option[] }) => {
+interface FilterContentProps {
+  options: FilterOption[];
+  selectedKeys: React.Key[];
+  setSelectedKeys: (selectedKeys: React.Key[]) => void;
+  confirm: (param?: { closeDropdown: boolean }) => void;
+}
+
+export const FilterContent: React.FC<FilterContentProps> = ({
+  options,
+  selectedKeys,
+  setSelectedKeys,
+  confirm,
+}) => {
+  const handleOptionSelect = (value: string) => {
+    if (selectedKeys.includes(value)) {
+      setSelectedKeys([]);
+    } else {
+      setSelectedKeys([value]);
+    }
+    confirm({ closeDropdown: false });
+  };
+
   return (
     <div className={styles.container}>
-      {options.map((option, idx) => (
+      {options.map((option) => (
         <FilterElement
           key={option.value}
           value={option.value}
-          label={option.label}
-          checked={idx % 2 === 1}
-          disabled={idx % 3 === 0}
+          label={option.text}
+          onChange={handleOptionSelect}
+          checked={selectedKeys.includes(option.value)}
         />
       ))}
     </div>
   );
 };
 
-const FilterElement = ({
+export const FilterElement = ({
   value,
   label,
   onChange,
