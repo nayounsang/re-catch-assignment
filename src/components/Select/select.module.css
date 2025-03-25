@@ -1,3 +1,7 @@
+.select {
+  width: 85px !important;
+}
+
 .select :global(.ant-select-selection-item) {
   color: #000 !important;
 }
