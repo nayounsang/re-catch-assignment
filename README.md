@@ -1,54 +1,28 @@
-# React + TypeScript + Vite
+# 개요
+- 유저 관리 시스템
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 사용 기술
+## 베이스
+- react 18
+- typescript
+- npm
+## 디자인
+- ant design
+## 빌드
+- vite
+## 데이터 관리
+- zustand
+- zod
 
-Currently, two official plugins are available:
+# 구동하는 법
+- .env를 남겨두었습니다.`STORAGE`에 `local-storage` 또는 `in-memory`를 지정해주세요.
+- 패키지 설치: `npm install`
+- 개발 서버 구동: `npm run dev`
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 기능
+- 회원 CRUD
+- 필터링
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+# 고려 사항
+- 체크박스 컬럼은 동작만 합니다. 콘솔 로그로 확인 가능합니다.
+- 기본 데이터 2개를 지워도 새로고침 || 재구동시 다시 복구 가능하도록 했습니다.  
