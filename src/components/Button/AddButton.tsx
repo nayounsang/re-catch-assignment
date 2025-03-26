@@ -22,7 +22,7 @@ export const AddButton = ({ disabled }: AddButtonProps) => {
       <RecordModal
         open={open}
         onCancel={() => setOpen(false)}
-        onSubmit={() => setOpen(false)}
+        onClose={() => setOpen(false)}
       />
     </>
   );

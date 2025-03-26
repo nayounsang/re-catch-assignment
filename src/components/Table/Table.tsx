@@ -10,7 +10,7 @@ import { getOptionWithKey } from "../../utils/Array";
 import styles from "./Table.module.css";
 import { FilterContent } from "../Filter/FilterContent";
 import { MenuButton } from "../Button/MenuButton";
-import { useRecordStore } from "../../store/tableStore";
+import { useRecordStore } from "../../store/recordStore";
 
 export const Table = () => {
   const { records: tableData } = useRecordStore();
