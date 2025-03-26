@@ -6,6 +6,8 @@ import { FormItem } from "../Form/FormItem";
 import styles from "./RecordModal.module.css";
 import { useRecordStore } from "../../store/recordStore";
 import { v4 as uuidv4 } from "uuid";
+import { useEffect } from "react";
+import dayjs from "dayjs";
 interface RecordModalProps {
   open: boolean;
   onCancel: () => void;
@@ -22,7 +24,19 @@ export const RecordModal = ({
   onClose,
 }: RecordModalProps) => {
   const [form] = Form.useForm();
-  const { createRecord, updateRecord } = useRecordStore();
+
+  const { createRecord, updateRecord, getRecordFromKey } = useRecordStore();
+  const record = getRecordFromKey(id);
+
+  useEffect(() => {
+    if (record) {
+      form.setFieldsValue({
+        ...record,
+        joinDate: record.joinDate ? dayjs(record.joinDate) : undefined,
+      });
+    }
+  }, [form, record]);
+
   const handleSubmit = async () => {
     const originalValues = await form.getFieldsValue();
     const values = {
@@ -78,6 +92,7 @@ export const RecordModal = ({
         </FormItem>
         <FormItem label="직업" name="job">
           <Select
+            defaultValue={record?.job ?? JobType.DEVELOPER}
             options={[
               { label: JobType.DEVELOPER, value: JobType.DEVELOPER },
               { label: JobType.DESIGNER, value: JobType.DESIGNER },
@@ -85,7 +100,11 @@ export const RecordModal = ({
             ]}
           />
         </FormItem>
-        <FormItem label="이메일 수신 동의" name="emailConsent">
+        <FormItem
+          label="이메일 수신 동의"
+          name="emailConsent"
+          valuePropName="checked"
+        >
           <Checkbox name="emailConsent" />
         </FormItem>
       </Form>
