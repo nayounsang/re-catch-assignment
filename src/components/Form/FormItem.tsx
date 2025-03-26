@@ -1,12 +1,11 @@
 import { PropsWithChildren } from "react";
 import styles from "./FormItem.module.css";
-import { Form } from "antd";
+import { Form, FormItemProps as AntFormItemProps } from "antd";
 
-interface FormItemProps {
+interface FormItemProps extends AntFormItemProps {
   label: string;
   name: string;
   required?: boolean;
-  valuePropName?: string;
 }
 
 export const FormItem = ({
@@ -14,7 +13,7 @@ export const FormItem = ({
   name,
   required,
   children,
-  valuePropName,
+  ...props
 }: PropsWithChildren<FormItemProps>) => {
   return (
     <label id={name} className={styles.container}>
@@ -22,7 +21,7 @@ export const FormItem = ({
         {label}
         {required && <span className={styles.required}>*</span>}
       </span>
-      <Form.Item name={name} valuePropName={valuePropName} noStyle>
+      <Form.Item {...props} name={name} noStyle>
         {children}
       </Form.Item>
     </label>
