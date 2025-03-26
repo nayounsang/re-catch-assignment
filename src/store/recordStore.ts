@@ -1,7 +1,7 @@
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
 import { Record } from "../schema/record";
 import { defaultRecords } from "../const/defaultRecord";
-
+import { createJSONStorage, persist } from "zustand/middleware";
 interface TableStore {
   records: Record[];
   getRecordFromKey: (key: string | undefined) => Record | undefined;
@@ -10,7 +10,9 @@ interface TableStore {
   deleteRecords: (key: string[]) => void;
 }
 
-export const useRecordStore = create<TableStore>((set, get) => ({
+const isLocalStorage = import.meta.env.STORAGE === "local-storage";
+
+const storeLogic: StateCreator<TableStore> = (set, get) => ({
   records: defaultRecords,
   getRecordFromKey: (key) => {
     return key ? get().records.find((record) => record.key === key) : undefined;
@@ -30,4 +32,17 @@ export const useRecordStore = create<TableStore>((set, get) => ({
       records: state.records.filter((r) => !keys.includes(r.key)),
     }));
   },
-}));
+});
+
+const createNormalStore = () => create<TableStore>()(storeLogic);
+const createPersistedStore = () =>
+  create<TableStore>()(
+    persist(storeLogic, {
+      name: "record-storage",
+      storage: createJSONStorage(() => localStorage),
+    })
+  );
+
+export const useRecordStore = isLocalStorage
+  ? createPersistedStore()
+  : createNormalStore();

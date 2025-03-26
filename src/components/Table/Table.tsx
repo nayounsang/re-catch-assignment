@@ -139,7 +139,7 @@ export const Table = () => {
       );
     },
     getCheckboxProps: (record: Record) => ({
-      disabled: record.name === "Disabled User", // Column configuration not to be checked
+      disabled: record.name === "Disabled User",
       name: record.name,
     }),
   };
