@@ -7,7 +7,11 @@ export interface SelectProps {
   options: Option[];
 }
 
-export const Select = ({ defaultValue, onChange, options }: SelectProps) => {
+export const Select = ({
+  defaultValue,
+  onChange,
+  options,
+}: SelectProps) => {
   return (
     <AntSelect
       defaultValue={defaultValue}

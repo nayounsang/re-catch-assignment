@@ -6,7 +6,7 @@ interface TableStore {
   records: Record[];
   getRecordFromKey: (key: string) => Record | undefined;
   createRecord: (record: Record) => void;
-  updateRecord: (record: Record) => void;
+  updateRecord: (key: string, record: Record) => void;
   deleteRecords: (key: string[]) => void;
 }
 
@@ -20,9 +20,9 @@ export const useRecordStore = create<TableStore>((set, get) => ({
       records: [...state.records, record],
     }));
   },
-  updateRecord: (record: Record) => {
+  updateRecord: (key: string, record: Record) => {
     set((state) => ({
-      records: state.records.map((r) => (r.key === record.key ? record : r)),
+      records: state.records.map((r) => (r.key === key ? record : r)),
     }));
   },
   deleteRecords: (keys: string[]) => {

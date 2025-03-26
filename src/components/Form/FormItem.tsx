@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import styles from "./FormItem.module.css";
+import { Form } from "antd";
 
 interface FormItemProps {
   label: string;
@@ -19,7 +20,9 @@ export const FormItem = ({
         {label}
         {required && <span className={styles.required}>*</span>}
       </span>
-      {children}
+      <Form.Item name={name} noStyle>
+        {children}
+      </Form.Item>
     </label>
   );
 };
