@@ -6,11 +6,11 @@ import {
 } from "antd";
 import { DataRecord } from "../../schema/record";
 import { useMemo } from "react";
-import { getOptionWithKey } from "../../utils/Array";
 import styles from "./Table.module.css";
 import { FilterContent } from "../Filter/FilterContent";
 import { MenuButton } from "../Button/MenuButton";
 import { useRecordStore } from "../../store/recordStore";
+import { getFinalOptionWithKey } from "../../utils/array";
 
 export const Table = () => {
   const { records: tableData } = useRecordStore();
@@ -21,7 +21,7 @@ export const Table = () => {
         dataIndex: "name",
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
           <FilterContent
-            options={getOptionWithKey(tableData, "name")}
+            options={getFinalOptionWithKey(tableData, "name")}
             selectedKeys={selectedKeys}
             setSelectedKeys={setSelectedKeys}
             confirm={confirm}
@@ -34,7 +34,7 @@ export const Table = () => {
         dataIndex: "address",
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
           <FilterContent
-            options={getOptionWithKey(tableData, "address")}
+            options={getFinalOptionWithKey(tableData, "address")}
             selectedKeys={selectedKeys}
             setSelectedKeys={setSelectedKeys}
             confirm={confirm}
@@ -47,7 +47,7 @@ export const Table = () => {
         dataIndex: "memo",
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
           <FilterContent
-            options={getOptionWithKey(tableData, "memo")}
+            options={getFinalOptionWithKey(tableData, "memo")}
             selectedKeys={selectedKeys}
             setSelectedKeys={setSelectedKeys}
             confirm={confirm}
@@ -60,7 +60,7 @@ export const Table = () => {
         dataIndex: "joinDate",
         filterDropdown: ({ setSelectedKeys, selectedKeys, confirm }) => (
           <FilterContent
-            options={getOptionWithKey(tableData, "joinDate")}
+            options={getFinalOptionWithKey(tableData, "joinDate")}
             selectedKeys={selectedKeys}
             setSelectedKeys={setSelectedKeys}
             confirm={confirm}

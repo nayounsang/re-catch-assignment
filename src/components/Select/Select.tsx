@@ -1,6 +1,6 @@
 import { Select as AntSelect } from "antd";
 import styles from "./select.module.css";
-import { Option } from "../../types";
+import { Option } from "../../types/option";
 export interface SelectProps {
   defaultValue?: string;
   onChange?: (value: string, option?: Option | Option[] | undefined) => void;

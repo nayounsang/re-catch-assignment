@@ -1,7 +1,7 @@
 import { Checkbox } from "antd";
 import { useId } from "react";
 import styles from "./FilterContent.module.css";
-import { FilterOption } from "../../types";
+import { FilterOption } from "../../types/option";
 
 interface FilterContentProps {
   options: FilterOption[];
