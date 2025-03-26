@@ -130,6 +130,9 @@ export const Table = () => {
     [tableData]
   );
 
+  /**
+   * 체크 박스 컬럼 테스트용 함수
+   */
   const rowSelection: TableProps<Record>["rowSelection"] = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: Record[]) => {
       console.log(
@@ -139,7 +142,6 @@ export const Table = () => {
       );
     },
     getCheckboxProps: (record: Record) => ({
-      disabled: record.name === "Disabled User",
       name: record.name,
     }),
   };
