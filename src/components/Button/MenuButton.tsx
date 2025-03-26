@@ -3,6 +3,7 @@ import { Button, Divider, Popover } from "antd";
 import { useState } from "react";
 import styles from "./MenuButton.module.css";
 import { useRecordStore } from "../../store/recordStore";
+import { RecordModal } from "../Modal/RecordModal";
 export interface MenuButtonProps {
   onClick?: React.MouseEventHandler<HTMLElement>;
   disabled?: boolean;
@@ -14,6 +15,7 @@ export interface MenuButtonProps {
 
 export const MenuButton = ({ onClick, disabled, keyID }: MenuButtonProps) => {
   const [open, setOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const { deleteRecords } = useRecordStore();
 
   const handleOpenChange = (newOpen: boolean) => {
@@ -22,6 +24,10 @@ export const MenuButton = ({ onClick, disabled, keyID }: MenuButtonProps) => {
 
   const handleDelete = () => {
     deleteRecords([keyID]);
+  };
+
+  const handleEdit = () => {
+    setEditModalOpen(true);
   };
 
   return (
@@ -36,7 +42,9 @@ export const MenuButton = ({ onClick, disabled, keyID }: MenuButtonProps) => {
       }}
       content={
         <div className={styles.menu}>
-          <Button type="text">수정</Button>
+          <Button type="text" onClick={handleEdit}>
+            수정
+          </Button>
           <Divider className={styles.divider} />
           <Button type="text" danger onClick={handleDelete}>
             삭제
@@ -49,6 +57,12 @@ export const MenuButton = ({ onClick, disabled, keyID }: MenuButtonProps) => {
         icon={<MoreOutlined />}
         onClick={onClick}
         disabled={disabled}
+      />
+      <RecordModal
+        open={editModalOpen}
+        onCancel={() => setEditModalOpen(false)}
+        onClose={() => setEditModalOpen(false)}
+        id={keyID}
       />
     </Popover>
   );
