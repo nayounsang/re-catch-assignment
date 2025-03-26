@@ -52,7 +52,6 @@ export const RecordModal = ({
         setIsError(false);
       })
       .catch((error) => {
-        console.log("error in setFormError", error);
         if (error instanceof ZodError) {
           setIsError(true);
         }
@@ -63,10 +62,6 @@ export const RecordModal = ({
 
   useEffect(() => {
     if (record) {
-      form.setFieldsValue({
-        ...record,
-        joinDate: record.joinDate ? dayjs(record.joinDate) : undefined,
-      });
       setFormError();
     }
   }, [form, record, setFormError]);
@@ -112,6 +107,16 @@ export const RecordModal = ({
         className={styles["form-container"]}
         form={form}
         onValuesChange={handleValuesChange}
+        initialValues={
+          record
+            ? {
+                ...record,
+                joinDate: record.joinDate ? dayjs(record.joinDate) : undefined,
+              }
+            : {
+                job: JobType.DEVELOPER,
+              }
+        }
       >
         <FormItem label="이름" name="name" required>
           <Input placeholder="Input" />
@@ -127,7 +132,6 @@ export const RecordModal = ({
         </FormItem>
         <FormItem label="직업" name="job">
           <Select
-            defaultValue={record?.job ?? JobType.DEVELOPER}
             options={[
               { label: JobType.DEVELOPER, value: JobType.DEVELOPER },
               { label: JobType.DESIGNER, value: JobType.DESIGNER },
