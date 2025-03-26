@@ -118,13 +118,13 @@ export const Table = () => {
           const boolValue = value === "true";
           return Boolean(record?.emailConsent) === boolValue;
         },
-        render: (value) => (
+        render: (value: boolean) => (
           <Checkbox checked={value} className={styles.checkbox} />
         ),
       },
       {
-        dataIndex: "update",
-        render: () => <MenuButton />,
+        dataIndex: "key",
+        render: (value: string) => <MenuButton keyID={value} />,
       },
     ],
     [tableData]
