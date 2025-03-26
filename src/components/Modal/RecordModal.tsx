@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { ZodError } from "zod";
+
 interface RecordModalProps {
   open: boolean;
   onCancel: () => void;
@@ -18,6 +19,7 @@ interface RecordModalProps {
    */
   id?: string;
 }
+
 export const RecordModal = ({
   open,
   onCancel,

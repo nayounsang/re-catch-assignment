@@ -1,6 +1,6 @@
-import { Record } from "../schema/record";
+import { DataRecord } from "../schema/record";
 import { v4 as uuidv4 } from "uuid";
-export const defaultRecords: Record[] = [
+export const defaultRecords: DataRecord[] = [
   {
     key: uuidv4(),
     name: "John Doe",

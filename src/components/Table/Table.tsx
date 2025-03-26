@@ -4,7 +4,7 @@ import {
   TableColumnsType,
   TableProps,
 } from "antd";
-import { Record } from "../../schema/record";
+import { DataRecord } from "../../schema/record";
 import { useMemo } from "react";
 import { getOptionWithKey } from "../../utils/Array";
 import styles from "./Table.module.css";
@@ -14,7 +14,7 @@ import { useRecordStore } from "../../store/recordStore";
 
 export const Table = () => {
   const { records: tableData } = useRecordStore();
-  const columns: TableColumnsType<Record> = useMemo(
+  const columns: TableColumnsType<DataRecord> = useMemo(
     () => [
       {
         title: "이름",
@@ -133,21 +133,21 @@ export const Table = () => {
   /**
    * 체크 박스 컬럼 테스트용 함수
    */
-  const rowSelection: TableProps<Record>["rowSelection"] = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: Record[]) => {
+  const rowSelection: TableProps<DataRecord>["rowSelection"] = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataRecord[]) => {
       console.log(
         `selectedRowKeys: ${selectedRowKeys}`,
         "selectedRows: ",
         selectedRows
       );
     },
-    getCheckboxProps: (record: Record) => ({
+    getCheckboxProps: (record: DataRecord) => ({
       name: record.name,
     }),
   };
 
   return (
-    <AntdTable<Record>
+    <AntdTable<DataRecord>
       columns={columns}
       dataSource={tableData}
       rowSelection={rowSelection}

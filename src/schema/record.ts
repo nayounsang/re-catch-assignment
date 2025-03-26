@@ -17,4 +17,4 @@ export const recordSchema = z.object({
   emailConsent: z.boolean().optional(),
 });
 
-export type Record = z.infer<typeof recordSchema>;
+export type DataRecord = z.infer<typeof recordSchema>;

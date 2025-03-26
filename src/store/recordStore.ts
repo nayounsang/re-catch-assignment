@@ -1,12 +1,12 @@
 import { create, StateCreator } from "zustand";
-import { Record } from "../schema/record";
+import { DataRecord } from "../schema/record";
 import { defaultRecords } from "../const/defaultRecord";
 import { createJSONStorage, persist } from "zustand/middleware";
 interface TableStore {
-  records: Record[];
-  getRecordFromKey: (key: string | undefined) => Record | undefined;
-  createRecord: (record: Record) => void;
-  updateRecord: (key: string, record: Record) => void;
+  records: DataRecord[];
+  getRecordFromKey: (key: string | undefined) => DataRecord | undefined;
+  createRecord: (record: DataRecord) => void;
+  updateRecord: (key: string, record: DataRecord) => void;
   deleteRecords: (key: string[]) => void;
 }
 
@@ -17,12 +17,12 @@ const storeLogic: StateCreator<TableStore> = (set, get) => ({
   getRecordFromKey: (key) => {
     return key ? get().records.find((record) => record.key === key) : undefined;
   },
-  createRecord: (record: Record) => {
+  createRecord: (record: DataRecord) => {
     set((state) => ({
       records: [...state.records, record],
     }));
   },
-  updateRecord: (key: string, record: Record) => {
+  updateRecord: (key: string, record: DataRecord) => {
     set((state) => ({
       records: state.records.map((r) => (r.key === key ? record : r)),
     }));
