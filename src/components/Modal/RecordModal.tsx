@@ -6,8 +6,9 @@ import { FormItem } from "../Form/FormItem";
 import styles from "./RecordModal.module.css";
 import { useRecordStore } from "../../store/recordStore";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { ZodError } from "zod";
 interface RecordModalProps {
   open: boolean;
   onCancel: () => void;
@@ -28,25 +29,48 @@ export const RecordModal = ({
   const { createRecord, updateRecord, getRecordFromKey } = useRecordStore();
   const record = getRecordFromKey(id);
 
-  useEffect(() => {
-    if (record) {
-      form.setFieldsValue({
-        ...record,
-        joinDate: record.joinDate ? dayjs(record.joinDate) : undefined,
-      });
-    }
-  }, [form, record]);
-
-  const handleSubmit = async () => {
+  const getParsedFormValues = useCallback(async () => {
     const originalValues = await form.getFieldsValue();
     const values = {
       ...originalValues,
       joinDate: originalValues.joinDate
         ? originalValues.joinDate.format("YYYY-MM-DD")
         : undefined,
-      key: uuidv4(),
+      key: record?.key ?? uuidv4(),
     };
     const validatedValues = recordSchema.parse(values);
+    return validatedValues;
+  }, [form, record?.key]);
+
+  const setFormError = useCallback(async () => {
+    if (!open) return;
+
+    await getParsedFormValues()
+      .then(() => {
+        setIsError(false);
+      })
+      .catch((error) => {
+        console.log("error in setFormError", error);
+        if (error instanceof ZodError) {
+          setIsError(true);
+        }
+      });
+  }, [getParsedFormValues, open]);
+
+  const [isError, setIsError] = useState(true);
+
+  useEffect(() => {
+    if (record) {
+      form.setFieldsValue({
+        ...record,
+        joinDate: record.joinDate ? dayjs(record.joinDate) : undefined,
+      });
+      setFormError();
+    }
+  }, [form, record, setFormError]);
+
+  const handleSubmit = async () => {
+    const validatedValues = await getParsedFormValues();
     if (id) {
       updateRecord(id, validatedValues);
     } else {
@@ -54,6 +78,10 @@ export const RecordModal = ({
     }
     form.resetFields();
     onClose();
+  };
+
+  const handleValuesChange = async () => {
+    await setFormError();
   };
 
   return (
@@ -66,7 +94,7 @@ export const RecordModal = ({
           <Button type="default" onClick={onCancel}>
             취소
           </Button>
-          <Button type="primary" onClick={handleSubmit}>
+          <Button type="primary" onClick={handleSubmit} disabled={isError}>
             {id ? "수정" : "추가"}
           </Button>
         </div>
@@ -77,7 +105,12 @@ export const RecordModal = ({
         body: styles["body"],
       }}
     >
-      <Form layout="vertical" className={styles["form-container"]} form={form}>
+      <Form
+        layout="vertical"
+        className={styles["form-container"]}
+        form={form}
+        onValuesChange={handleValuesChange}
+      >
         <FormItem label="이름" name="name" required>
           <Input placeholder="Input" />
         </FormItem>
