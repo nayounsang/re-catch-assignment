@@ -1,21 +1,14 @@
-import { Select as AntSelect } from "antd";
+import { Select as AntSelect, SelectProps as AntSelectProps } from "antd";
 import styles from "./select.module.css";
 import { Option } from "../../types/option";
-export interface SelectProps {
-  defaultValue?: string;
-  onChange?: (value: string, option?: Option | Option[] | undefined) => void;
+export interface SelectProps extends AntSelectProps {
   options: Option[];
 }
 
-export const Select = ({
-  defaultValue,
-  onChange,
-  options,
-}: SelectProps) => {
+export const Select = ({ options, ...props }: SelectProps) => {
   return (
     <AntSelect
-      defaultValue={defaultValue}
-      onChange={onChange}
+      {...props}
       className={styles.select}
       popupClassName={styles["select-item"]}
     >
